@@ -1,0 +1,11 @@
+# Primary AllStarLink Repo for Production Packages
+deb [signed-by=/etc/apt/keyrings/allstarlink-keyring.gpg]  https://apt.allstarlink.org/repos/asl_builds __DREL__ main
+
+# Testing Repository for Beta Packages
+#deb [signed-by=/etc/apt/keyrings/allstarlink-keyring.gpg]  https://apt.allstarlink.org/repos/asl_builds-testing __DREL__ main
+
+# Development Repository for Development
+# !! If you are not a developer and have not been told by a !!
+# !! developer to uncomment this than DO NOT                !!
+#deb [signed-by=/etc/apt/keyrings/allstarlink-keyring.gpg]  https://apt.allstarlink.org/repos/asl_builds-devel __DREL__ main
+

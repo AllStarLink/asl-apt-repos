@@ -1,0 +1,13 @@
+Source: asl-apt-repo
+Section: Utilties
+Priority: optional
+Maintainer: AllStarLink Inc.
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://apt.allstarlink.org/repos/
+Rules-Requires-Root: binary-targets
+
+Package: asl-apt-repo
+Architecture: all
+Depends: ${misc:Depends}
+Description: AllStarLink Debian Repo Info
