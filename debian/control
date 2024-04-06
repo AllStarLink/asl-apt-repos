@@ -1,4 +1,4 @@
-Source: asl-apt-repo
+Source: asl-apt-repos
 Section: Utilties
 Priority: optional
 Maintainer: AllStarLink Inc.
@@ -7,7 +7,7 @@ Standards-Version: 4.5.1
 Homepage: https://apt.allstarlink.org/repos/
 Rules-Requires-Root: binary-targets
 
-Package: asl-apt-repo
+Package: asl-apt-repos
 Architecture: all
 Depends: ${misc:Depends}
 Description: AllStarLink Debian Repo Info
