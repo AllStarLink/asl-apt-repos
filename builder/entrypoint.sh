@@ -17,7 +17,7 @@ echo "OS_CODENAME: ${OS_CODENAME}"
 cd /build
 
 export EMAIL="AllStarLink <autobuild@allstarlink.org>"
-pushd asl3-update-nodelist
+pushd asl-apt-repos
 make deb DREL=${DREL}
 popd
 mkdir _debs
