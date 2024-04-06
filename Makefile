@@ -25,12 +25,15 @@ $(DESTDIR)/etc/apt/sources.list.d/%: %
 	perl -pi -e "s/__DREL__/$(DREL)/g" $@
 
 deb:	debclean debprep
-	debuild
+	debchange --distribution stable --package $(PKGNAME) \
+        --newversion $(EPOCHVER)$(RELVER)-$(DEBVER).$(RELPLAT) \
+        "Autobuild of $(EPOCHVER)$(RELVER)-$(DEBVER) for $(RELPLAT)"
+	dpkg-buildpackage -b --no-sign
+	git checkout debian/changelog
 
 debchange:
 	debchange -v $(RELVER)-$(DEBVER)
 	debchange -r
-
 
 debprep:	debclean
 	(cd .. && \
