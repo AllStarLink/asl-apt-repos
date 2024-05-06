@@ -1,0 +1,75 @@
+#!/usr/bin/bash
+
+LISTFILE=/etc/apt/sources.list.d/allstarlink.list
+
+if [ "$(whoami)" != "root" ]; then
+	echo "ERROR: must be run as root or using sudo" 1>&2
+	exit 1
+fi
+
+function set_level() {
+	echo -n "Setting level $1..."
+	case $1 in
+		main) COMPONENTS="main" ;;
+		beta) COMPONENTS="main beta" ;;
+		devel)
+			echo "WARNING: It is not recommended to use 'devel' unless instructed to by a developer!!"
+			COMPONENTS="main beta devel"
+			;;
+		*) usage ;;
+	esac
+
+	cat - > ${LISTFILE} <<EOF
+# set by asl-repo-switch to ${1}
+deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public bookworm ${COMPONENTS}
+EOF
+	echo " DONE"
+}
+
+function reset(){
+	cat - > ${LISTFILE} <<EOF
+# Primary AllStarLink Repo for Production Packages
+deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public bookworm main
+
+# Include Beta Component for Testing
+#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public bookworm main beta
+
+# Include Beta and Devel component for Development
+# !! If you are not a developer and have not been told by a !!
+# !! developer to uncomment this than DO NOT                !!
+#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public bookworm main beta devel
+EOF
+
+}
+
+## Options
+function usage() { 
+	echo "Usage: $0 -l (main | beta | devel) --> Set level" 1>&2
+	echo "Usage: $0 -r --> Reset to stock" 1>&2
+	exit 1
+}
+
+while getopts "l:r" opt; do
+	case ${opt} in
+		l)	LEVEL="${OPTARG}"; OP="level" ;;
+		r)	RESET=y ; OP="reset" ;;
+		*)	usage ;;
+	esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${LEVEL}" ] && [ -z "${RESET}" ]; then
+	usage
+fi
+
+if [ ! -z "${LEVEL}" ] && [ ! -z "${RESET}" ]; then
+	echo "ERROR: -l LEVEL and -r (reset) options conflict" 1>&2
+fi
+
+case ${OP} in
+	level)	set_level ${LEVEL};;
+	reset)	reset;;
+esac
+
+echo "Run 'apt update' to refresh the package repo cache."
+exit 0
