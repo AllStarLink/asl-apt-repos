@@ -3,7 +3,7 @@
 #
 SRCNAME = asl-apt-repos
 PKGNAME = $(SRCNAME)
-RELVER = 1.3
+RELVER = 1.4
 DEBVER = 1
 RELPLAT ?= deb$(shell lsb_release -rs 2> /dev/null)
 
@@ -16,7 +16,8 @@ default:
 	@echo This does nothing 
 
 install: $(DESTDIR)/etc/apt/keyrings/allstarlink.gpg \
-	$(DESTDIR)/etc/apt/sources.list.d/allstarlink.list
+	$(DESTDIR)/etc/apt/sources.list.d/allstarlink.list \
+	$(DESTDIR)/usr/bin/asl-repo-switch
 
 $(DESTDIR)/etc/apt/keyrings/%: %
 	install -D -m 0644 $< $@
@@ -24,6 +25,9 @@ $(DESTDIR)/etc/apt/keyrings/%: %
 $(DESTDIR)/etc/apt/sources.list.d/%: %
 	install -D -m 0644 $< $@
 	perl -pi -e "s/__DREL__/$(DREL)/g" $@
+
+$(DESTDIR)/usr/bin/%:	%
+	install -D -m 0755 $< $@
 
 deb:	debclean debprep
 	debchange --distribution stable --package $(PKGNAME) \

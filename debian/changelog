@@ -1,3 +1,9 @@
+asl-apt-repos (1.4-1) unstable; urgency=medium
+
+  * Added asl-repo-switch(1) 
+
+ -- Jason McCormick <jason@mfamily.org>  Sun, 05 May 2024 20:56:02 -0400
+
 asl-apt-repos (1.0-1) unstable; urgency=medium
 
   * Initial release
