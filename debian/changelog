@@ -1,3 +1,11 @@
+asl-apt-repos (2.0-1) unstable; urgency=medium
+
+  * Add support for trixie (and future platforms)
+  * Fix typos (#2, #3)
+  * asl-repo-switch(1) now report the current release set (#4)
+
+ -- Jason McCormick <jason@mfamily.org>  Sun, 10 Aug 2025 12:22:47 -0400
+
 asl-apt-repos (1.4-1) unstable; urgency=medium
 
   * Added asl-repo-switch(1) 

@@ -3,7 +3,7 @@
 #
 SRCNAME = asl-apt-repos
 PKGNAME = $(SRCNAME)
-RELVER = 1.5
+RELVER = 2.0
 DEBVER = 1
 RELPLAT ?= deb$(shell lsb_release -rs 2> /dev/null)
 RELEASE = $(shell lsb_release -cs 2> /dev/null)
