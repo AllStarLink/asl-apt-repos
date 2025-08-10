@@ -21,7 +21,7 @@ function set_level() {
 
 	cat - > ${LISTFILE} <<EOF
 # set by asl-repo-switch to ${1}
-deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public bookworm ${COMPONENTS}
+deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public @@RELEASE@@ ${COMPONENTS}
 EOF
 	echo " DONE"
 }
@@ -29,15 +29,15 @@ EOF
 function reset(){
 	cat - > ${LISTFILE} <<EOF
 # Primary AllStarLink Repo for Production Packages
-deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public bookworm main
+deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public @@RELEASE@@ main
 
 # Include Beta Component for Testing
-#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public bookworm main beta
+#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public @@RELEASE@@ main beta
 
 # Include Beta and Devel component for Development
 # !! If you are not a developer and have not been told by a !!
 # !! developer to uncomment this than DO NOT                !!
-#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public bookworm main beta devel
+#deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public @@RELEASE@@ main beta devel
 EOF
 
 }

@@ -3,9 +3,10 @@
 #
 SRCNAME = asl-apt-repos
 PKGNAME = $(SRCNAME)
-RELVER = 1.4
+RELVER = 1.5
 DEBVER = 1
 RELPLAT ?= deb$(shell lsb_release -rs 2> /dev/null)
+RELEASE = $(shell lsb_release -cs 2> /dev/null)
 
 ifdef ${DESTDIR}
 DESTDIR=${DESTDIR}
@@ -24,10 +25,11 @@ $(DESTDIR)/etc/apt/keyrings/%: %
 
 $(DESTDIR)/etc/apt/sources.list.d/%: %
 	install -D -m 0644 $< $@
-	perl -pi -e "s/__DREL__/$(DREL)/g" $@
+	perl -pi -e "s/@@RELEASE@@/$(RELEASE)/g" $@
 
 $(DESTDIR)/usr/bin/%:	%
 	install -D -m 0755 $< $@
+	perl -pi -e "s/@@RELEASE@@/$(RELEASE)/g" $@
 
 deb:	debclean debprep
 	debchange --distribution stable --package $(PKGNAME) \
