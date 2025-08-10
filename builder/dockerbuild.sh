@@ -65,7 +65,7 @@ else
   REPO_ENV=""
 fi
 
-APTLY_REPO="asl3-${OPEARTING_SYSTEMS}-${REPO_LEVEL}"
+APTLY_REPO="asl3-${OPERATING_SYSTEMS}-${REPO_LEVEL}"
 
 ## Need to clean this up to be more elegant
 echo "Architectures: $ARCH"
