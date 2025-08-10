@@ -71,7 +71,7 @@ APTLY_REPO="asl3-${OPEARTING_SYSTEMS}-${REPO_LEVEL}"
 echo "Architectures: $ARCH"
 echo "Targets: $TARGETS"
 echo "Operating Systems: $OPERATING_SYSTEMS"
-echo "Aptly Repo: ${APTLY_REPO}
+echo "Aptly Repo: ${APTLY_REPO}"
 echo "PWD: $(pwd)"
 echo "BS: ${BASH_SOURCE[0]}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
