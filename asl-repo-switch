@@ -36,7 +36,7 @@ deb [signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/p
 
 # Include Beta and Devel component for Development
 # !! If you are not a developer and have not been told by a !!
-# !! developer to uncomment this than DO NOT                !!
+# !! developer to uncomment this then DO NOT                !!
 #deb [signed-by=/etc/apt/keyrings/allstarlink.gpg]  https://repo.allstarlink.org/public @@RELEASE@@ main beta devel
 EOF
 
