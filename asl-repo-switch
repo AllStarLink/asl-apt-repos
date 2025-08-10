@@ -49,27 +49,36 @@ function usage() {
 	exit 1
 }
 
-while getopts "l:r" opt; do
+print_enabled(){
+	grep -E '^deb' /etc/apt/sources.list.d/allstarlink.list | awk '{print $4": "$5" "$6" "$7}'
+}
+
+OP="print"
+while getopts "hl:r" opt; do
 	case ${opt} in
 		l)	LEVEL="${OPTARG}"; OP="level" ;;
 		r)	RESET=y ; OP="reset" ;;
-		*)	usage ;;
+		h)	OP="help" ;;
+		*)	OP="print" ;;
 	esac
 done
 shift $((OPTIND-1))
-
-if [ -z "${LEVEL}" ] && [ -z "${RESET}" ]; then
-	usage
-fi
 
 if [ ! -z "${LEVEL}" ] && [ ! -z "${RESET}" ]; then
 	echo "ERROR: -l LEVEL and -r (reset) options conflict" 1>&2
 fi
 
 case ${OP} in
-	level)	set_level ${LEVEL};;
-	reset)	reset;;
+	level)
+		set_level ${LEVEL}
+		echo "Run 'apt update' to refresh the package repo cache."
+		;;
+	reset)	
+		reset
+		echo "Run 'apt update' to refresh the package repo cache."
+		;;
+	print)  print_enabled;;
+	*)		usage;;
 esac
 
-echo "Run 'apt update' to refresh the package repo cache."
 exit 0
