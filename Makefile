@@ -25,11 +25,11 @@ $(DESTDIR)/etc/apt/keyrings/%: %
 
 $(DESTDIR)/etc/apt/sources.list.d/%: %
 	install -D -m 0644 $< $@
-	perl -pi -e "s/@@RELEASE@@/$(RELEASE)/g" $@
+	perl -pi -e "s/\@\@RELEASE\@\@/$(RELEASE)/g" $@
 
 $(DESTDIR)/usr/bin/%:	%
 	install -D -m 0755 $< $@
-	perl -pi -e "s/@@RELEASE@@/$(RELEASE)/g" $@
+	perl -pi -e "s/\@\@RELEASE\@\@/$(RELEASE)/g" $@
 
 deb:	debclean debprep
 	debchange --distribution stable --package $(PKGNAME) \
